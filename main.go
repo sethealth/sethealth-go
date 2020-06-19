@@ -3,6 +3,7 @@ package sethealth
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"net/http"
 )
 
@@ -14,6 +15,8 @@ type Client struct {
 	secret string
 	client *http.Client
 }
+
+var ErrorLogin = errors.New("Invalid credentials")
 
 type tokenResponse struct {
 	Token string `json:"token"`
@@ -46,6 +49,9 @@ func (c *Client) GetToken() (string, error) {
 	resp, err := c.client.Do(req)
 	if err != nil {
 		return "", err
+	}
+	if resp.StatusCode != 200 {
+		return "", ErrorLogin
 	}
 
 	var token tokenResponse
