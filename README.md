@@ -65,3 +65,5 @@ func main() {
     fmt.Println("ACCESS TOKEN", token)
 }
 ```
+
+>Note: Credentials should be kept secret, it's not a good practice to hard code them in the source code.
