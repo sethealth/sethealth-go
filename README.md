@@ -1,4 +1,4 @@
-# sethealth go client
+# Sethealth go client
 
 Sethealth go clients allows to access the backend sethealth API from a server.
 The unique use case of this library today is to provide a authentication schema to delegate the "frontend" javascript library to communicate safely with the sethealth backend.
@@ -17,14 +17,14 @@ git get -u github.com/sethealth/go-client
 
 Get your service account credentials from the [Sethealth Dashboard](https://dashboard.set.health).
 
-**.bashrc/.zshrc:***
+**.bashrc/.zshrc:**
 
 ```bash
 export SETHEALTH_KEY="0000000000000"
 export SETHEALTH_SECRET="r_xxxxxxxxxxxxxxxxxxxxxxxxxxxx="
 ```
 
-**main.go:***
+**main.go:**
 
 ```go
 package main
