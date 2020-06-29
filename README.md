@@ -15,6 +15,37 @@ git get -u github.com/sethealth/go-client
 
 ## Usage
 
+Get your service account credentials from the [Sethealth Dashboard](https://dashboard.set.health).
+
+**.bashrc/.zshrc:***
+
+```bash
+export SETHEALTH_KEY="0000000000000"
+export SETHEALTH_SECRET="r_xxxxxxxxxxxxxxxxxxxxxxxxxxxx="
+```
+
+**main.go:***
+
+```go
+package main
+
+import (
+    "github.com/sethealth/go-client"
+    "fmt"
+)
+
+func main() {
+    // Create a new sethealth client with the service account credentials
+    client := sethealth.New()
+
+    // Ask for a short-living access token
+    token := client.getToken()
+    fmt.Println("ACCESS TOKEN", token)
+}
+```
+
+Alternatively, the credentials can be provided programatically using the `sethealth.NewWithCredentials()`:
+
 ```go
 package main
 
@@ -27,10 +58,10 @@ func main() {
     // Create a new sethealth client with the service account credentials
     apiKey := "HERE THE API KEY"
     apiSecret := "HERE THE API SECRET"
-    client := sethealth.New(apiKey, apiSecret)
+    client := sethealth.NewWithCredentials(apiKey, apiSecret)
 
     // Ask for a short-living access token
     token := client.getToken()
     fmt.Println("ACCESS TOKEN", token)
 }
-
+```

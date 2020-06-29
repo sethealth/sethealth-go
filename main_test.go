@@ -2,12 +2,11 @@ package sethealth
 
 import (
 	"fmt"
-	"os"
 	"testing"
 )
 
 func TestValidRequest(t *testing.T) {
-	client := New(os.Getenv("SETHEALTH_KEY"), os.Getenv("SETHEALTH_SECRET"))
+	client := New()
 	token, err := client.GetToken()
 	if err != nil {
 		t.Fatal(err)
@@ -18,7 +17,7 @@ func TestValidRequest(t *testing.T) {
 }
 
 func TestUnvalidRequest(t *testing.T) {
-	client := New("", "")
+	client := NewWithCredentials("", "")
 	ta, err := client.GetToken()
 	fmt.Println(ta, err)
 	if err == nil {
