@@ -11,7 +11,7 @@ func TestValidRequest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(token) < 10 {
+	if len(token.Token) < 10 {
 		t.Fatal("TOKEN is not valid")
 	}
 }

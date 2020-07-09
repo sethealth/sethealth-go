@@ -26,7 +26,7 @@ type Client struct {
 
 var ErrorLogin = errors.New("Invalid credentials")
 
-type tokenResponse struct {
+type TokenResponse struct {
 	Token string `json:"token"`
 }
 
@@ -51,12 +51,13 @@ func NewWithCredentials(key, secret string) *Client {
 }
 
 // GetToken returns a new short-living token to be used by client side.
-func (c *Client) GetToken() (string, error) {
+func (c *Client) GetToken() (TokenResponse, error) {
 	return c.GetTokenWithOptions(TokenOptions{})
 }
 
-// GetToken returns a new short-living token to be used by client side with options.
-func (c *Client) GetTokenWithOptions(opts TokenOptions) (string, error) {
+// GetTokenWithOptions returns a new short-living token to be used by client side with options.
+func (c *Client) GetTokenWithOptions(opts TokenOptions) (TokenResponse, error) {
+	var token TokenResponse
 	data := map[string]interface{}{
 		"key":        c.key,
 		"secret":     c.secret,
@@ -74,16 +75,15 @@ func (c *Client) GetTokenWithOptions(opts TokenOptions) (string, error) {
 	// Fetch Request
 	resp, err := c.client.Do(req)
 	if err != nil {
-		return "", err
+		return token, err
 	}
 	if resp.StatusCode != 200 {
-		return "", ErrorLogin
+		return token, ErrorLogin
 	}
 
-	var token tokenResponse
 	err = json.NewDecoder(resp.Body).Decode(&token)
 	if err != nil {
-		return "", err
+		return token, err
 	}
-	return token.Token, nil
+	return token, nil
 }

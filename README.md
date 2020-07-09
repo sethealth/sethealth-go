@@ -1,6 +1,6 @@
-# Sethealth go client
+# Sethealth Go client
 
-Sethealth go clients allows to access the backend sethealth API from a server.
+Sethealth Go client allows to access the backend sethealth API from a server.
 The unique use case of this library today is to provide a authentication schema to delegate the "frontend" javascript library to communicate safely with the sethealth backend.
 
 This is accomplish by the generation of a `service account` in sethealth. A service account is a long-living account for non-human users, like servers. Once a service account is created, a `api key` and a `api secret` are generated, this credentials **MUST be kept private, never exposed in a client side application.**
@@ -39,8 +39,8 @@ func main() {
     client := sethealth.New()
 
     // Ask for a short-living access token
-    token := client.getToken()
-    fmt.Println("ACCESS TOKEN", token)
+    token, err := client.GetToken()
+    fmt.Println("ACCESS TOKEN", token.Token)
 }
 ```
 
@@ -61,8 +61,8 @@ func main() {
     client := sethealth.NewWithCredentials(apiKey, apiSecret)
 
     // Ask for a short-living access token
-    token := client.getToken()
-    fmt.Println("ACCESS TOKEN", token)
+    token, err := client.GetToken()
+    fmt.Println("ACCESS TOKEN", token.Token)
 }
 ```
 
