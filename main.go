@@ -11,7 +11,7 @@ import (
 
 const host = "https://api.set.health"
 
-type TokenOptions struct {
+type GetTokenOptions struct {
 	UserID    string
 	ExpiresIn time.Duration
 	TestMode  bool
@@ -24,9 +24,10 @@ type Client struct {
 	client *http.Client
 }
 
-var ErrorLogin = errors.New("Invalid credentials")
+var ErrCredentials = errors.New("Invalid credentials")
 
-type TokenResponse struct {
+// GetTokenResponse contains the result values of calling the GetToken() API
+type GetTokenResponse struct {
 	Token string `json:"token"`
 }
 
@@ -51,13 +52,13 @@ func NewWithCredentials(key, secret string) *Client {
 }
 
 // GetToken returns a new short-living token to be used by client side.
-func (c *Client) GetToken() (TokenResponse, error) {
-	return c.GetTokenWithOptions(TokenOptions{})
+func (c *Client) GetToken() (GetTokenResponse, error) {
+	return c.GetTokenWithOptions(GetTokenOptions{})
 }
 
 // GetTokenWithOptions returns a new short-living token to be used by client side with options.
-func (c *Client) GetTokenWithOptions(opts TokenOptions) (TokenResponse, error) {
-	var token TokenResponse
+func (c *Client) GetTokenWithOptions(opts GetTokenOptions) (GetTokenResponse, error) {
+	var token GetTokenResponse
 	data := map[string]interface{}{
 		"key":        c.key,
 		"secret":     c.secret,
@@ -78,7 +79,7 @@ func (c *Client) GetTokenWithOptions(opts TokenOptions) (TokenResponse, error) {
 		return token, err
 	}
 	if resp.StatusCode != 200 {
-		return token, ErrorLogin
+		return token, ErrCredentials
 	}
 
 	err = json.NewDecoder(resp.Body).Decode(&token)
