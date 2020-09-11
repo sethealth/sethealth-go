@@ -10,7 +10,7 @@ This "long-living" credentials can be used instead to create short-living creden
 ## Install
 
 ```
-git get -u github.com/sethealth/go-client
+go get -u github.com/sethealth/go-client
 ```
 
 ## Usage

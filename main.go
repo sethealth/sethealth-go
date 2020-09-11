@@ -60,7 +60,7 @@ func (c *Client) GetToken() (GetTokenResponse, error) {
 func (c *Client) GetTokenWithOptions(opts GetTokenOptions) (GetTokenResponse, error) {
 	var token GetTokenResponse
 	data := map[string]interface{}{
-		"key":        c.key,
+		"id":         c.key,
 		"secret":     c.secret,
 		"test-mode":  opts.TestMode,
 		"expires-in": opts.ExpiresIn,

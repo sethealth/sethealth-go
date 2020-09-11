@@ -1,7 +1,6 @@
 package sethealth
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -18,8 +17,7 @@ func TestValidRequest(t *testing.T) {
 
 func TestUnvalidRequest(t *testing.T) {
 	client := NewWithCredentials("", "")
-	ta, err := client.GetToken()
-	fmt.Println(ta, err)
+	_, err := client.GetToken()
 	if err == nil {
 		t.Fatal("Request should be unvalid")
 	}
