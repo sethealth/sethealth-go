@@ -10,7 +10,7 @@ This "long-living" credentials can be used instead to create short-living creden
 ## Install
 
 ```
-go get -u github.com/sethealth/go-client
+go get -u github.com/sethealth/sethealth-go
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ export SETHEALTH_SECRET="r_xxxxxxxxxxxxxxxxxxxxxxxxxxxx="
 package main
 
 import (
-    "github.com/sethealth/go-client"
+    "github.com/sethealth/sethealth-go"
     "fmt"
 )
 
@@ -50,7 +50,7 @@ Alternatively, the credentials can be provided programatically using the `sethea
 package main
 
 import (
-    "github.com/sethealth/go-client"
+    "github.com/sethealth/sethealth-go"
     "fmt"
 )
 
